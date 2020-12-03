@@ -3,7 +3,12 @@ package com.aoc.day_1;
 import java.util.Arrays;
 
 class SumOfThreeNumbers {
+    private static int[] numbers;
+    private static int sum;
+
     public static long findPair(int[] numbers, int sum) {
+        SumOfThreeNumbers.numbers = numbers;
+        SumOfThreeNumbers.sum = sum;
         Arrays.sort(numbers);
         int low = 0;
         int high = numbers.length - 1;
