@@ -16,7 +16,6 @@ public class NumberOfTrees {
                 myWriter.write(line);
             }
             myWriter.write("\n");
-
         }
         myWriter.close();
         in.close();
@@ -37,7 +36,6 @@ public class NumberOfTrees {
             if (line.charAt(locationOfUsefulChar + rightMoves) == '#') {
                 count++;
             }
-
             locationOfUsefulChar = locationOfUsefulChar + rightMoves;
         }
         readingInput.close();
