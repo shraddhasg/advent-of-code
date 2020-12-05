@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class ValidPassports {
-    public static HashMap createhashmap(ArrayList<String> lines) {
+    public static HashMap createHashmap(ArrayList<String> lines) {
         Object[] arr = lines.toArray();
 
         String[] str = new String[arr.length];
@@ -122,7 +122,7 @@ public class ValidPassports {
 
 
     public static boolean isValidForPartTwo(ArrayList<String> lines) {
-        HashMap<String, String> map = createhashmap(lines);
+        HashMap<String, String> map = createHashmap(lines);
 
         int count = 0;
 
@@ -150,7 +150,7 @@ public class ValidPassports {
 
     public static boolean isValidForPartOne(ArrayList<String> lines) {
 
-        HashMap<String, String> map = createhashmap(lines);
+        HashMap<String, String> map = createHashmap(lines);
 
         if (map.containsKey("byr") == false || map.containsKey("iyr") == false || map.containsKey("eyr") == false || map.containsKey("hgt") == false || map.containsKey("hcl") == false || map.containsKey("ecl") == false || map.containsKey("pid") == false)
             return false;
