@@ -91,15 +91,41 @@ public class HighestBordingPassId {
         return map;
     }
 
+    public static int findMissingBoardingPass(ArrayList<Map.Entry<Integer, Integer>> arrayListOfMap) {
+
+        HashSet<Integer> set = new HashSet<>();
+        for (int i = 0; i < arrayListOfMap.size(); i++) set.add(arrayListOfMap.get(i).getValue());
+        
+        ArrayList<Integer> al = new ArrayList<>(set);
+        al.remove(0);
+        al.remove(al.size() - 1);
+
+        int missingBoardingPass = 0;
+
+        for (int i = 1; i < al.size() - 1; i++) {
+            int element = al.get(i);
+            if (Collections.binarySearch(al, element - 1) >= 0 && Collections.binarySearch(al, element + 1) >= 0) {
+                missingBoardingPass = element;
+                break;
+            }
+        }
+
+        return missingBoardingPass;
+    }
+
 
     public static int findYourSeatId(ArrayList<Integer> al) {
 
         HashMap<Integer, Integer> map = createHashMap(al);
 
         ArrayList<Map.Entry<Integer, Integer>> arrayListOfMap = sortMap(map);
+
+        int missingBoardingPass = findMissingBoardingPass(arrayListOfMap);
+
         int ans = 0;
         for (int i = 1; i < arrayListOfMap.size() - 1; i++) {
-            if (arrayListOfMap.get(i).getValue() != 6 && arrayListOfMap.get(i).getValue() != 4 && arrayListOfMap.get(i).getValue() != 2) {
+
+            if (arrayListOfMap.get(i).getValue() == missingBoardingPass) {
                 ans = arrayListOfMap.get(i).getKey();
                 break;
             }
