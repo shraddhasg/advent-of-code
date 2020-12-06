@@ -92,12 +92,10 @@ public class HighestBordingPassId {
         }
 
         Collections.sort(result);
-        System.out.println("All Boarding pass ID's=" + result);
-        // System.out.println("***************************************************************");
         System.out.println("Heighest id=" + result.get(result.size() - 1));
-
 
         int yourSeatId = findYourSeatId(result);
         System.out.println("Your seat id=" + yourSeatId);
     }
 }
+
