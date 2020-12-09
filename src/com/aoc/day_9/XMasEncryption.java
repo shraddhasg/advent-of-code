@@ -29,33 +29,29 @@ public class XMasEncryption {
         return data;
     }
 
-    public static ArrayList<String> isValid(long candidate, ArrayList<Long> preambleData) {
-        ArrayList<String> result = new ArrayList<>();
+    public static boolean isValid(long candidate, ArrayList<Long> preambleData) {
 
         for (int i = 0; i < preambleData.size() - 1; i++) {
-            long left = preambleData.get(i);
+            long first = preambleData.get(i);
             for (int j = i + 1; j < preambleData.size(); j++) {
-                long right = preambleData.get(j);
-                if (left + right == candidate) {
-                    if (pair.containsKey(left) && pair.get(left) == right) continue;
-                    if (pair.containsKey(right) && pair.get(right) == left) continue;
-                    pair.put(left, right);
-                    result.add("true");
-                    result.add(i + "");
-                    result.add(j + "");
-                    return result;
+                long second = preambleData.get(j);
+                if (first + second == candidate) {
+                    if (pair.containsKey(first) && pair.get(first) == second) continue;
+                    if (pair.containsKey(second) && pair.get(second) == first) continue;
+                    pair.put(first, second);
+                    return true;
                 }
             }
         }
-        return result;
+        return false;
     }
 
     public static long partOne(ArrayList<Long> preambleData, ArrayList<Long> data) {
         long ans = 0l;
 
         for (int i = 0; i < data.size(); i++) {
-            ArrayList<String> result = isValid(data.get(i), preambleData);
-            if (result.size() == 0) {
+            boolean result = isValid(data.get(i), preambleData);
+            if (!result) {
                 ans = data.get(i);
                 break;
             } else {
@@ -66,7 +62,7 @@ public class XMasEncryption {
         return ans;
     }
 
-    public static ArrayList<String> continiousSubarrayWithGivenSum(ArrayList<Long> data, long sum) {
+    public static ArrayList<String> continiousSubArrayWithGivenSum(ArrayList<Long> data, long sum) {
         int i, j;
         long currentSum;
 
@@ -109,7 +105,7 @@ public class XMasEncryption {
         long partOneAns = partOne(preambleData, data);
         System.out.println("Part one= " + partOneAns);
 
-        ArrayList<String> subArrayIndexes = continiousSubarrayWithGivenSum(data, partOneAns);
+        ArrayList<String> subArrayIndexes = continiousSubArrayWithGivenSum(data, partOneAns);
         long partTwoAns = partTwo(subArrayIndexes, data);
         System.out.println("Part two = " + partTwoAns);
     }
