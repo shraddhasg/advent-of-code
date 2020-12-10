@@ -47,22 +47,22 @@ public class XMasEncryption {
     }
 
     public static long partOne(ArrayList<Long> preambleData, ArrayList<Long> data) {
-        long ans = 0l;
+        long ans = 0L;
 
-        for (int i = 0; i < data.size(); i++) {
-            boolean result = isValid(data.get(i), preambleData);
+        for (Long datum : data) {
+            boolean result = isValid(datum, preambleData);
             if (!result) {
-                ans = data.get(i);
+                ans = datum;
                 break;
             } else {
-                preambleData.add(data.get(i));
+                preambleData.add(datum);
                 preambleData.remove(0);
             }
         }
         return ans;
     }
 
-    public static ArrayList<String> continiousSubArrayWithGivenSum(ArrayList<Long> data, long sum) {
+    public static ArrayList<String> continuousSubArrayWithGivenSum(ArrayList<Long> data, long sum) {
         int i, j;
         long currentSum;
 
@@ -105,7 +105,7 @@ public class XMasEncryption {
         long partOneAns = partOne(preambleData, data);
         System.out.println("Part one= " + partOneAns);
 
-        ArrayList<String> subArrayIndexes = continiousSubArrayWithGivenSum(data, partOneAns);
+        ArrayList<String> subArrayIndexes = continuousSubArrayWithGivenSum(data, partOneAns);
         long partTwoAns = partTwo(subArrayIndexes, data);
         System.out.println("Part two = " + partTwoAns);
     }
