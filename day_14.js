@@ -47,10 +47,10 @@ const input2 = fs
     if (e[0] === "m" && e[1] === "a") {
       return ["mask", e.substr(7)];
     } else {
-      e = e.split(" = ");
-      e[0] = e[0].substr(3);
-      e[0] = e[0].slice(0, -1).slice(1);
-      return [parseInt(e[0]), parseInt([e[1]])];
+      e = e.split(" = ");  //mem[37813] = 345
+      e[0] = e[0].substr(3); //[37813]
+      e[0] = e[0].slice(0, -1).slice(1); //37813
+      return [parseInt(e[0]), parseInt([e[1]])]; //37813,345
     }
   });
 
@@ -65,7 +65,7 @@ input2.forEach((instruction) => {
     let binaryKey = instruction[0].toString(2).padStart(36, 0).split("");
     // APPLY MASK TO MEMORY BINARY
     for (let i = 0; i < 36; i++) {
-      if (mask2[i] === "X" || mask2[i] === "1") {
+      if (mask2[i] === "X" || mask2[i] === "1") { //1X110XX0101001X0110010X0X01001X1X101
         binaryKey[i] = mask2[i];
       }
     }
@@ -74,11 +74,11 @@ input2.forEach((instruction) => {
     let possiblesKeys = [binaryKey.map((e) => e)];
     while (check !== 0) {
       check = 0;
-      possiblesKeys.forEach((key, index) => {
-        let x = key.indexOf("X");
+      possiblesKeys.forEach((key, index) => {//00000000000000000000000000000001X0XX
+        let x = key.indexOf("X");//key = 1X0XX [10000,10001,10010,10011,11000,11001,11010,11011]
         if (x !== -1) {
-          key[x] = "0";
-          possiblesKeys.push(key.map((e) => e));
+          key[x] = "0";//100xx
+          possiblesKeys.push(key.map((e) => e));// -- 100xx,110xx,1000x
           key[x] = "1";
           possiblesKeys.push(key.map((e) => e));
           check++;
