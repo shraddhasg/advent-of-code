@@ -70,8 +70,8 @@ public class TicketTranslation {
 
     public static long partTwo(ArrayList<ArrayList<Integer>> nearbyTickets, ArrayList<String> validFeilds, ArrayList<Integer> yourTickets) throws FileNotFoundException {
         ArrayList<ArrayList<Integer>> discardInvalidTickets = discardInvalidTickets(nearbyTickets, validFeilds);
-        ArrayList<ArrayList<String>> validFeildsForPartTwo = validFieldsForPartTwo(new File("resources/inputs/day_16.txt"));
-        ArrayList<String> result = findLocationsOfFields(discardInvalidTickets, validFeildsForPartTwo);
+        ArrayList<ArrayList<String>> validFieldsForPartTwo = validFieldsForPartTwo(new File("resources/inputs/day_16.txt"));
+        ArrayList<String> result = findLocationsOfFields(discardInvalidTickets, validFieldsForPartTwo);
 
         ArrayList<Integer> index = new ArrayList<>();
         for (int i = 0; i < result.size(); i++) {
@@ -170,7 +170,7 @@ public class TicketTranslation {
         return 0;
     }
 
-    public static ArrayList<String> findLocationsOfFields(ArrayList<ArrayList<Integer>> nearbyTickets, ArrayList<ArrayList<String>> validFeilds) {
+    public static ArrayList<String> findLocationsOfFields(ArrayList<ArrayList<Integer>> nearbyTickets, ArrayList<ArrayList<String>> validFields) {
 
         ArrayList<String> result = new ArrayList<>();
 
@@ -180,11 +180,11 @@ public class TicketTranslation {
             for (j = 0; j < nearbyTickets.size(); j++) {
                 candidates.add(nearbyTickets.get(j).get(i));
             }
-            String ckeck = isNearByTicketPosCorrect(candidates, validFeilds);
+            String ckeck = isNearByTicketPosCorrect(candidates, validFields);
             if (!ckeck.equals("no")) {
                 result.add(ckeck + "=" + i);
-                int index = findIndexInValidFields(ckeck, validFeilds);
-                validFeilds.remove(index);
+                int index = findIndexInValidFields(ckeck, validFields);
+                validFields.remove(index);
             }
         }
         return result;
